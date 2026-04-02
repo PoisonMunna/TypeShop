@@ -87,6 +87,8 @@ summary.total: number            // Always calculated
 
 ## 📁 Project Structure
 
+```bash
+
 ecommerce-cart/  
 ├── public/    
 │   └── vite.svg  
@@ -112,4 +114,5 @@ ecommerce-cart/
 ├── tsconfig.json    
 ├── tsconfig.app.json   
 ├── vite.config.ts   
-└── README.md   
+└── README.md
+```
