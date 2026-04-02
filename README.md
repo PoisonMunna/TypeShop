@@ -1,75 +1,85 @@
-# React + TypeScript + Vite
+# 🛍️ TypeShop — E-Commerce Cart System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional e-commerce shopping cart built with **TypeScript + React + Vite**.  
+This project demonstrates how TypeScript prevents pricing bugs, invalid data, and runtime errors through strict typing.
 
-Currently, two official plugins are available:
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 📸 Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### 🏪 Shop Page
+- Browse 12 products across 5 categories
+- Search products by name
+- Filter by category (Electronics, Clothing, Books, Food, Sports)
+- View product ratings, stock levels, and pricing
+- Add items to cart with stock validation
 
-Note: This will impact Vite dev & build performances.
+### 🛒 Cart Page
+- View all items in cart
+- Increase/decrease item quantity
+- Remove individual items
+- Clear entire cart
+- Real-time price calculations
 
-## Expanding the ESLint configuration
+### 🏷️ Discount System
+- Apply coupon codes for discounts
+- Percentage-based discounts (e.g., 10% off)
+- Fixed-amount discounts (e.g., $20 off)
+- Minimum purchase validation
+- Remove applied discounts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 💳 Checkout
+- Order summary with subtotal, discount, tax, and total
+- Animated success popup on checkout
+- Order number generation
+- Itemized receipt in popup
+- "Continue Shopping" flow after purchase
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🎟️ Available Coupon Codes
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Code     | Type       | Value  | Min Purchase | Description                   |
+|----------|------------|--------|--------------|-------------------------------|
+| `SAVE10` | Percentage | 10%    | $50.00       | 10% off on orders above $50  |
+| `FLAT20` | Fixed      | $20.00 | $100.00      | $20 off on orders above $100 |
+| `MEGA25` | Percentage | 25%    | $200.00      | 25% off on orders above $200 |
+| `FIRST5` | Fixed      | $5.00  | $0.00        | $5 off on any order          |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔷 TypeScript Concepts Demonstrated
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Concept                | Where It's Used                              |
+|------------------------|----------------------------------------------|
+| `interface`            | Product, CartItem, Discount, CartSummary     |
+| `enum`                 | ProductCategory, DiscountType                |
+| `union types`          | DiscountResult (success \| failure)          |
+| `strict null checks`   | `Discount \| null`, `CartItem \| undefined`  |
+| `discriminated unions` | DiscountResult with `success` flag           |
+| `React event types`    | `ChangeEvent`, `KeyboardEvent`, `MouseEvent` |
+| `custom hooks typing`  | useCart return type                           |
+| `generic callbacks`    | `useCallback`, `useMemo` with types          |
+| `type assertions`      | Category filter casting                      |
+| `optional chaining`    | `cartItem?.quantity ?? 0`                    |
+
+---
+
+## 🛡️ How TypeScript Prevents Bugs
+
+```typescript
+// ❌ WITHOUT TypeScript — These bugs are possible:
+product.price = "fifty"          // String instead of number
+cart.quantity = -5               // Negative quantity
+discount.type = "mega-sale"     // Invalid discount type
+summary.total = undefined       // Missing calculation
+
+// ✅ WITH TypeScript — All caught at compile time:
+product.price: number            // Only numbers allowed
+cart.quantity: number             // Validated in logic
+discount.type: DiscountType      // Only "percentage" | "fixed"
+summary.total: number            // Always calculated
