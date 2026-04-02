@@ -83,3 +83,33 @@ product.price: number            // Only numbers allowed
 cart.quantity: number             // Validated in logic
 discount.type: DiscountType      // Only "percentage" | "fixed"
 summary.total: number            // Always calculated
+```
+
+## 📁 Project Structure
+
+ecommerce-cart/  
+├── public/    
+│   └── vite.svg  
+├── src/  
+│   ├── types/  
+│   │   └── index.ts              # All TypeScript interfaces & enums  
+│   ├── data/   
+│   │   └── products.ts           # Mock product data & discount codes   
+│   ├── hooks/   
+│   │   └── useCart.ts            # Cart logic (add, remove, discount, totals)   
+│   ├── components/   
+│   │   ├── Header.tsx            # Navigation header with cart badge  
+│   │   ├── ProductCard.tsx       # Individual product display card     
+│   │   ├── ProductList.tsx       # Product grid with search & filters   
+│   │   ├── CartItemRow.tsx       # Single cart item with quantity controls  
+│   │   ├── Cart.tsx              # Cart page with checkout & success popup  
+│   │   └── DiscountInput.tsx     # Coupon code input & validation   
+│   ├── App.tsx                   # Main app with tab navigation   
+│   ├── App.css                   # All styles  
+│   └── main.tsx                  # Entry point   
+├── index.html   
+├── package.json   
+├── tsconfig.json    
+├── tsconfig.app.json   
+├── vite.config.ts   
+└── README.md   
